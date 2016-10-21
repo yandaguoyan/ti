@@ -1,0 +1,42 @@
+<!doctype html>
+<html lang="en" ng-app="my">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<style>
+		span{
+			color:red;
+			font-size:12px;
+			font-weight:bold;
+		}
+		form label{
+			display:inline-block;
+			width:100px;
+			height:25px;
+			line-height:25px;
+		}
+	</style>
+</head>
+<body ng-controller="cro">
+	<form ng-submit="valid()" name="myform" novalidate ng-model="form">
+
+		<p><label for="">用户名：</label><input type="text" name="username" ng-model="username" required ng-minlength=3><span ng-show="myform.username.$dirty&&myform.username.$invalid">显示用户名不合法</span></p>
+		<!-- 没有通过，被修改过，$pristine//没有修改过true -->
+		<p><label for="">邮箱：</label><input type="email" name="email" ng-model="email">
+		<span ng-show="myform.email.$dirty&&myform.email.$invalid">email不符合格式</span></p>
+		<p><label for="">QQ：</label><input type="text" name="QQ" ng-model="QQ" ng-pattern="/^[1-9]\d{4,10}$/">
+		<span ng-show="myform.QQ.$dirty&&myform.QQ.$invalid" >QQ不符合格式</span></p>
+		<input type="submit">
+		<p>请选择性别</p>
+		<p><input type="radio" name="sex" value="female" ng-model="sex">女
+		·<input type="radio" name="sex" value="male" ng-model="sex">男</p>
+		<p><input type="checkbox" name="check" ng-model="check" ng-true-value="'同意该协议'" ng-false-value="'不同意该协议'">协议</p>
+		<p>{{info}}</p>
+		<!-- 当表单出错时才出现 -->
+		<p ng-show="myform.$error.$valid">{{myform.$error}}</p>
+	</form>
+	
+</body>
+</html>
+<script src="js/angular.min.js"></script>
+<script src="js/form.js"></script>
